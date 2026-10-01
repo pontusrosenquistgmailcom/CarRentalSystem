@@ -85,4 +85,14 @@ public class VehicleAssets {
     public void setInUse(boolean inUse) {
         this.inUse = inUse;
     }
+
+    public void printVehicle(){
+        System.out.println("Manufacturer: " + this.getManufacturer() +
+                "\nModel: " + this.getModel());
+        if(this.isBooked){
+            System.out.println("This vehicle is booked");
+        } else if (this.isInUse()){
+            System.out.println("This vehicle is on the road already");
+        }
+    }
 }
