@@ -10,6 +10,7 @@ public class VehicleAssets {
     private boolean hybrid;
     private boolean isBooked;
     private boolean inUse;
+    private Members user;
 
     public VehicleAssets(String vehicleID, String licenceNumber, String manufacturer, String model, boolean electric, boolean hybrid, boolean isBooked, boolean inUse) {
         setVehicleID(vehicleID);
@@ -27,6 +28,9 @@ public class VehicleAssets {
     }
 
     public void setVehicleID(String vehicleID) {
+        if (vehicleID == null || vehicleID.isBlank()) {
+            throw new IllegalArgumentException("ERROR: vehicleID cannot be blank");
+        }
         this.vehicleID = vehicleID;
     }
 
@@ -35,6 +39,9 @@ public class VehicleAssets {
     }
 
     public void setLicenceNumber(String licenceNumber) {
+        if (licenceNumber == null || licenceNumber.isBlank()) {
+            throw new IllegalArgumentException("ERROR: licenseNumber cannot be blank.");
+        }
         this.licenceNumber = licenceNumber;
     }
 
@@ -43,6 +50,9 @@ public class VehicleAssets {
     }
 
     public void setManufacturer(String manufacturer) {
+        if (manufacturer == null || manufacturer.isBlank()) {
+            throw new IllegalArgumentException("ERROR: manufacturer cannot be blank.");
+        }
         this.manufacturer = manufacturer;
     }
 
@@ -51,6 +61,9 @@ public class VehicleAssets {
     }
 
     public void setModel(String model) {
+        if (model == null || model.isBlank()) {
+            throw new IllegalArgumentException("ERROR: model cannot be blank.");
+        }
         this.model = model;
     }
 
@@ -62,11 +75,11 @@ public class VehicleAssets {
         this.electric = electric;
     }
 
-    public boolean getHybrid(){
+    public boolean getHybrid() {
         return hybrid;
     }
 
-    public void setHybrid(boolean hybrid){
+    public void setHybrid(boolean hybrid) {
         this.hybrid = hybrid;
     }
 
@@ -86,13 +99,24 @@ public class VehicleAssets {
         this.inUse = inUse;
     }
 
-    public void printVehicle(){
-        System.out.println("Manufacturer: " + this.getManufacturer() +
-                "\nModel: " + this.getModel());
-        if(this.isBooked){
-            System.out.println("This vehicle is booked");
-        } else if (this.isInUse()){
-            System.out.println("This vehicle is on the road already");
+    public void printVehicle() {
+        System.out.print("Manufacturer: " + this.getManufacturer() +
+                " | Model: " + this.getModel());
+        if (this.isBooked) {
+            System.out.print(" | This vehicle is booked by: " + this.user.getName());
+        } else if (this.isInUse()) {
+            System.out.print(" | This vehicle has been picked up by: " + this.user.getLastName());
         }
+        System.out.println("");
+    }
+
+    public void bookVehicle(Members m) {
+        this.setBooked(true);
+        this.user = m;
+    }
+
+    public void returnVehicle() {
+        this.setBooked(false);
+        this.user = null;
     }
 }

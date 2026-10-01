@@ -8,8 +8,8 @@ public class CRSMenu {
 
         // 0 = display all
         // 1 = display available for booking (hide isBooked & inUse)
-        // 2 = display all booked, for collection
-        // 3 = display InUse for return
+        // 2 = display all isBooked, for collection
+        // 3 = display inUse for return
         switch(displaySort){
             // 0 = display ALL
             case 0:
@@ -25,7 +25,7 @@ public class CRSMenu {
                     }
                 }
                 break;
-            // 2 show booked for pick up
+            // 2 show booked for pickup
             case 2:
                 for(VehicleAssets v : inv){
                     if(v.isBooked()) {
@@ -51,10 +51,16 @@ public class CRSMenu {
     public void run() {
 
         ArrayList<VehicleAssets> inventory = new ArrayList<>();
+        ArrayList<Members> members = new ArrayList<>();
 
         inventory.add(new VehicleAssets("01","ABC123","Volvo","Firebird", true, false, false, false));
-        inventory.add(new VehicleAssets("02","UFT901","Toyota","Ultra", true, true, true, false));
-        inventory.add(new VehicleAssets("03","LYX099","Mercedes","Crawler",false,false,false,true));
+        inventory.add(new VehicleAssets("02","UFT901","Toyota","Ultra", true, true, false, false));
+        inventory.add(new VehicleAssets("03","LYX099","Mercedes","Crawler",false,false,false,false));
+
+        members.add(new Members(0,"Pontus","Rosenquist"));
+
+        inventory.getLast().bookVehicle(members.getFirst());
+
 
         int userChoice;
         boolean keepRunning = true;
@@ -128,6 +134,8 @@ public class CRSMenu {
         }
 
     }
+
+
 
 
 }
