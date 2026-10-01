@@ -110,6 +110,10 @@ public class VehicleAssets {
         System.out.println("");
     }
 
+    public Members getUser(){
+        return this.user;
+    }
+
     public void bookVehicle(Members m) {
         this.setBooked(true);
         this.user = m;

@@ -53,11 +53,16 @@ public class CRSMenu {
         ArrayList<VehicleAssets> inventory = new ArrayList<>();
         ArrayList<Members> members = new ArrayList<>();
 
+        members.add(new Members(0,"Pontus","Rosenquist"));
+
         inventory.add(new VehicleAssets("01","ABC123","Volvo","Firebird", true, false, false, false));
         inventory.add(new VehicleAssets("02","UFT901","Toyota","Ultra", true, true, false, false));
         inventory.add(new VehicleAssets("03","LYX099","Mercedes","Crawler",false,false,false,false));
+        inventory.add(new PassengerCar("04","AAR009", "Opel", "Astra", true, true, false, false, 5));
+        inventory.add(new Truck("05", "TRY999", "BYD", "XTK", true, false, false, false, 2.15, 2000));
+        inventory.add(new MotorizedBike("06", "GAM", "Harley-Davidsson", "Extra", false, false, false, false, 190.5, false));
 
-        members.add(new Members(0,"Pontus","Rosenquist"));
+
 
         inventory.getLast().bookVehicle(members.getFirst());
 
@@ -72,19 +77,19 @@ public class CRSMenu {
 
             switch (userChoice) {
                 case 1:
-                    System.out.println("implement book vehicle");
+                    System.out.println("Vehicles available for booking: ");
                     displayInventory(inventory, 1);
                     break;
                 case 2:
-                    System.out.println("imprelent retrieve vehicle");
+                    System.out.println("Vehicles available for pickup: ");
                     displayInventory(inventory, 2);
                     break;
                 case 3:
-                    System.out.println("omplement return vehicle");
+                    System.out.println("Vehicles available for return");
                     displayInventory(inventory,3);
                     break;
                 case 4:
-                    System.out.println("make add/remove vehicle");
+                    System.out.println("todo. implement add/remove vehicle");
                     displayInventory(inventory, 0);
                     break;
                 case 5:
@@ -121,7 +126,7 @@ public class CRSMenu {
 
             try {
                 String strUserInput = scanner.nextLine();
-                if (strUserInput.toLowerCase().matches("e") || strUserInput.toLowerCase().matches("x") || strUserInput.toLowerCase().matches("exit")) {
+                if (strUserInput.toLowerCase().matches("q") || strUserInput.toLowerCase().matches("x") || strUserInput.toLowerCase().matches("exit")) {
                     return 5;
                 }
             } catch (Exception e2) {
