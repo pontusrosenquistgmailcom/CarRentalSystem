@@ -111,10 +111,10 @@ public class VehicleAssets {
     }
 
     private void printConditionalInfo(){
-        if (this.isBooked) {
-            System.out.print(" | This vehicle is booked by: " + this.user.getName());
-        } else if (this.isInUse()) {
+        if (this.isInUse()) {
             System.out.print(" | This vehicle has been picked up by: " + this.user.getLastName());
+        } else if (this.isBooked()) {
+            System.out.print(" | This vehicle is booked by: " + this.user.getName());
         }
         System.out.println("");
     }
@@ -132,5 +132,8 @@ public class VehicleAssets {
     public void returnVehicle() {
         this.setBooked(false);
         this.user = null;
+    }
+    public void pickUp(){
+        this.setInUse(true);
     }
 }

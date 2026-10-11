@@ -28,7 +28,7 @@ public class CRSMenu {
             // 2 show booked for pickup
             case 2:
                 for (VehicleAssets v : inv) {
-                    if (v.isBooked()) {
+                    if (v.isBooked() && !v.isInUse()) {
                         v.printVehicle();
                     }
                 }
@@ -81,7 +81,7 @@ public class CRSMenu {
                         System.out.println("Vehicles available for booking: ");
                         displayInventory(inventory, 1);
 
-                        VehicleAssets vehicle = selectVehicle(inventory);
+                        VehicleAssets vehicle = selectVehicleForBooking(inventory);
                         if (vehicle == null) {
                             System.out.println("CANCEL: Returning to Main menu.");
                             break;
@@ -105,8 +105,20 @@ public class CRSMenu {
                     }
                     break;
                 case 2:
-                    System.out.println("Vehicles available for pickup: ");
-                    displayInventory(inventory, 2);
+                    while (true) {
+                        System.out.println("Vehicles available for pickup: ");
+                        displayInventory(inventory, 2);
+                        VehicleAssets vehicle = selectVehicleForPickUp(inventory);
+                        if(vehicle == null){
+                            System.out.println("CANCEL: returning to main menu.");
+                            break;
+                        }
+
+                        vehicle.pickUp();
+                        System.out.println("[" + vehicle.getLicenceNumber() + "] " + vehicle.getManufacturer() + " " + vehicle.getModel() + " successfully delivered to customer");
+
+                        break;
+                    }
                     break;
                 case 3:
                     System.out.println("Vehicles available for return");
@@ -130,27 +142,25 @@ public class CRSMenu {
     }
 
     private void displayMenu() {
-        System.out.println("Welcome to the Ride Rental system!");
-        System.out.println("1. Book ride" +
-                "\n2. Retrieve ride" +
-                "\n3. Return ride" +
-                "\n4. Manage inventory" +
-                "\n5. Exit program");
+        System.out.println("Welcome to the Car Rental System!");
+        System.out.println("""
+                1. Book ride
+                2. Retrieve ride
+                3. Return ride
+                4. Manage inventory
+                5. Exit program""");
     }
 
     private int acceptUserMenuInput() {
         Scanner scanner = new Scanner(System.in);
 
         try {
-            int userInput = scanner.nextInt();
-
-            return userInput;
-
+            return scanner.nextInt();
         } catch (InputMismatchException e) {
 
             try {
                 String strUserInput = scanner.nextLine();
-                if (strUserInput.toLowerCase().matches("q") || strUserInput.toLowerCase().matches("x") || strUserInput.toLowerCase().matches("exit")) {
+                if (strUserInput.equalsIgnoreCase("q") || strUserInput.equalsIgnoreCase("x") || strUserInput.toLowerCase().matches("exit")) {
                     return 5;
                 }
             } catch (Exception e2) {
@@ -167,11 +177,9 @@ public class CRSMenu {
 
     // search for and select user loop returns Members object, on user CANCEL returns NULL
     private Members searchSelectMembers(ArrayList<Members> members) {
-        boolean doIt = true;
-        while (doIt) {
+        while (true) {
             System.out.println("enter userID to select member or search for user by name");
 
-            Members selectedUser = null;
             Scanner scanner = new Scanner(System.in);
 
             try {
@@ -193,7 +201,7 @@ public class CRSMenu {
                 if (name.equalsIgnoreCase("new")) {
                     System.out.println("to do: IMPLEMENT NEW USER WORKFLOW HERE---");
                 } else if (name.equalsIgnoreCase("cancel") || name.equalsIgnoreCase("x")) {
-                    return null;
+                    break;
                 }
                 System.out.println("Listing matching Members: ");
                 for (Members m : members) {
@@ -207,16 +215,54 @@ public class CRSMenu {
         return null;
     }
 
-
-    private VehicleAssets selectVehicle(ArrayList<VehicleAssets> vehicles) {
+// select vehicle that is available for booking. on user CANCEL returns NULL
+    private VehicleAssets selectVehicleForBooking(ArrayList<VehicleAssets> vehicles) {
         while (true) {
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter vehicle ID to select vehicle: ");
+            System.out.print("Enter vehicleID to select vehicle for booking: ");
 
             try {
                 int userInput = scanner.nextInt();
                 for (VehicleAssets v : vehicles) {
                     if (v.getVehicleID() == userInput) {
+
+                        if (v.isBooked() || v.isInUse()) {
+                            System.out.println("ID: [" + userInput + "] vehicle \u001B[31mis not available\u001B[0m.");
+                            break;
+                        }
+                        return v;
+                    }
+                }
+                System.out.println("ERROR: No matching vehicle ID");
+
+            } catch (InputMismatchException e) {
+                String userInputString = scanner.nextLine();
+                if (userInputString.equalsIgnoreCase("cancel") || userInputString.equalsIgnoreCase("x")) {
+                    //System.out.println("user input : " + userInputString + " returning NULL");
+                    return null;
+                }
+                System.out.println("ERROR: incorrect input format.");
+
+            }
+        }
+
+    }
+
+    private VehicleAssets selectVehicleForPickUp(ArrayList<VehicleAssets> vehicles){
+
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter vehicleID to select vehicle for pick up: ");
+
+            try {
+                int userInput = scanner.nextInt();
+                for (VehicleAssets v : vehicles) {
+                    if (v.getVehicleID() == userInput) {
+
+                        if (!v.isBooked() || v.isInUse()) {
+                            System.out.println("ID: [" + userInput + "] vehicle \u001B[31mis not available\u001B[0m for pick up.");
+                            break;
+                        }
                         return v;
                     }
                 }

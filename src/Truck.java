@@ -32,10 +32,10 @@ public class Truck extends VehicleAssets{
                 " | Model: " + this.getModel() +
                 " | Height: " + this.getHeight() + " m" +
                 " | Capacity: " + this.getCarryCapacity() + " Kg");
-        if (this.isBooked()) {
-            System.out.print(" | This vehicle is booked by: " + this.getUser().getName());
-        } else if (this.isInUse()) {
+        if (this.isInUse()) {
             System.out.print(" | This vehicle has been picked up by: " + this.getUser().getLastName());
+        } else if (this.isBooked()) {
+            System.out.print(" | This vehicle is booked by: " + this.getUser().getName());
         }
         System.out.println("");
     }

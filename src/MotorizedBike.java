@@ -34,10 +34,10 @@ public class MotorizedBike extends VehicleAssets{
         } else {
             System.out.print("No");
         }
-        if (this.isBooked()) {
-            System.out.print(" | This vehicle is booked by: " + this.getUser().getName());
-        } else if (this.isInUse()) {
+        if (this.isInUse()) {
             System.out.print(" | This vehicle has been picked up by: " + this.getUser().getLastName());
+        } else if (this.isBooked()) {
+            System.out.print(" | This vehicle is booked by: " + this.getUser().getName());
         }
         System.out.println("");
     }
