@@ -3,8 +3,8 @@ public class Truck extends VehicleAssets{
     private int carryCapacity;
 
 
-    public Truck(int vehicleID, String licenceNumber, String manufacturer, String model, boolean electric, boolean hybrid, boolean isBooked, boolean inUse, double height, int carryCapacity) {
-        super(vehicleID, licenceNumber, manufacturer, model, electric, hybrid, isBooked, inUse);
+    public Truck(int vehicleID, String licenceNumber, String manufacturer, String model, double height, int carryCapacity) {
+        super(vehicleID, licenceNumber, manufacturer, model);
         setHeight(height);
         setCarryCapacity(carryCapacity);
     }

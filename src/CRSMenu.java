@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 public class CRSMenu {
 
+    interface Vehicle {
+        //void bookVehicle();
+        //void pickUpVehicle();
+        //void returnVehicle();
+    }
 
     public void run() {
 
@@ -12,12 +17,12 @@ public class CRSMenu {
 
         members.add(new Members(1, "Pontus", "Rosenquist"));
 
-        inventory.add(new VehicleAssets(1, "ABC123", "Volvo", "Firebird", true, false, false, false));
-        inventory.add(new VehicleAssets(2, "UFT901", "Toyota", "Ultra", true, true, false, false));
-        inventory.add(new VehicleAssets(3, "LYX099", "Mercedes", "Crawler", false, false, false, false));
-        inventory.add(new PassengerCar(4, "AAR009", "Opel", "Astra", true, true, false, false, 5));
-        inventory.add(new Truck(5, "TRY999", "BYD", "XTK", true, false, false, false, 2.15, 2000));
-        inventory.add(new MotorizedBike(6, "GAM", "Harley-Davidsson", "Extra", false, false, false, false, 190.5, false));
+        inventory.add(new PassengerCar(1, "ABC123", "Volvo", "Firebird", 4));
+        inventory.add(new PassengerCar(2, "UFT901", "Toyota", "Ultra", 4));
+        inventory.add(new Truck(3, "LYX099", "Mercedes", "Crawler", 3.35, 4500));
+        inventory.add(new PassengerCar(4, "AAR009", "Opel", "Astra", 5));
+        inventory.add(new Truck(5, "TRY999", "BYD", "XTK", 2.15, 2000));
+        inventory.add(new MotorizedBike(6, "GAM", "Harley-Davidsson", "Extra", 190.5, false));
 
 
         inventory.getLast().bookVehicle(members.getFirst());
@@ -28,7 +33,7 @@ public class CRSMenu {
         boolean keepRunning = true;
         do {
             this.displayMenu();
-            userChoice = this.acceptUserMenuInput();
+            userChoice = acceptUserMenuInput();
             //debug printLine info dump. move acceptUserMenuInput into switch condition
             System.out.println("Selected: " + userChoice);
 
@@ -38,7 +43,7 @@ public class CRSMenu {
                     while (true) {
                         System.out.println("Vehicles available for booking: ");
                         i = displayInventory(inventory, 1);
-                        if(i == 0){
+                        if (i == 0) {
                             System.out.println("\u001B[33mAll vehicles are currently unavailable and cannot be booked\u001B[0m");
                             break;
                         }
@@ -69,7 +74,7 @@ public class CRSMenu {
                 case 2:
                     System.out.println("Vehicles available for pickup: ");
                     i = displayInventory(inventory, 2);
-                    if(i == 0){
+                    if (i == 0) {
                         System.out.println("\u001B[33mThere are no booked vehicles.\u001B[0m");
                         break;
                     }
@@ -84,12 +89,12 @@ public class CRSMenu {
                 case 3:
                     System.out.println("Vehicles available for return");
                     i = displayInventory(inventory, 3);
-                    if(i == 0){
+                    if (i == 0) {
                         System.out.println("\u001B[33mThere are no vehicles to return!\u001B[0m");
                         break;
                     }
                     vehicle = selectVehicleForReturn(inventory);
-                    if(vehicle == null) {
+                    if (vehicle == null) {
                         System.out.println("\u001B[33mCANCEL\u001B[0m: Returning to Main menu.");
                         break;
                     }
@@ -97,8 +102,9 @@ public class CRSMenu {
                     System.out.println("[" + vehicle.getLicenceNumber() + "] returned successfully.");
                     break;
                 case 4:
-                    System.out.println("todo. implement add/remove vehicle");
-                    displayInventory(inventory, 0);
+                    //System.out.println("todo. implement add/remove vehicle");
+                    //displayInventory(inventory, 0);
+                    ManageInventory.managementMenu(inventory);
                     break;
                 case 5:
                     keepRunning = false;
@@ -172,7 +178,7 @@ public class CRSMenu {
                 5. Exit program""");
     }
 
-    private int acceptUserMenuInput() {
+    public static int acceptUserMenuInput() {
         Scanner scanner = new Scanner(System.in);
 
         try {

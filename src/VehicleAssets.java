@@ -12,15 +12,15 @@ public class VehicleAssets {
     private boolean inUse;
     private Members user;
 
-    public VehicleAssets(int vehicleID, String licenceNumber, String manufacturer, String model, boolean electric, boolean hybrid, boolean isBooked, boolean inUse) {
+    public VehicleAssets(int vehicleID, String licenceNumber, String manufacturer, String model) {
         setVehicleID(vehicleID);
         setLicenceNumber(licenceNumber);
         setManufacturer(manufacturer);
         setModel(model);
-        setElectric(electric);
-        setHybrid(hybrid);
-        setBooked(isBooked);
-        setInUse(inUse);
+        setElectric(false);
+        setHybrid(false);
+        setBooked(false);
+        setInUse(false);
     }
 
     public int getVehicleID() {

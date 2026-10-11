@@ -1,8 +1,10 @@
-public class PassengerCar extends VehicleAssets{
+import java.util.ArrayList;
+
+public class PassengerCar extends VehicleAssets implements CRSMenu.Vehicle {
     private int numberOfSeats;
 
-    public PassengerCar(int vehicleID, String licenceNumber, String manufacturer, String model, boolean electric, boolean hybrid, boolean isBooked, boolean inUse, int numberOfSeats) {
-        super(vehicleID, licenceNumber, manufacturer, model, electric, hybrid, isBooked, inUse);
+    public PassengerCar(int vehicleID, String licenceNumber, String manufacturer, String model, int numberOfSeats) {
+        super(vehicleID, licenceNumber, manufacturer, model);
         setNumberOfSeats(numberOfSeats);
     }
 
@@ -26,4 +28,5 @@ public class PassengerCar extends VehicleAssets{
         }
         System.out.println("");
     }
+
 }
