@@ -1,6 +1,16 @@
 # CarRentalSystem
 Small console application that manages vehicle assets for a rental car business.
 
+VehicleAssets superclass
+PassengerCar, Truck, MotorizedBike subclasses
+
+bookVehicle();
+pickUpVehicle();
+returnVehicle();
+
+newVehicle submenu
+
+
 # Planeringsmall — Projektskiss
 
 Fyll i denna mall innan ni börjar koda. Skissen är ett första utkast, inte ett facit — det är både normalt och förväntat att klassnamn och struktur ändras när ni väl börjar implementera. Spara den ifyllda mallen som README i er första commit, tillsammans med namn på den/de som jobbar i projektet.
@@ -16,8 +26,8 @@ Find your perfect ride with CRS! (``C``ar ``R``ental ``S``oftware, ``Cool Ride S
 
 ## Superklass
 
-- Namn: Vehicle
-- Gemensamma fält: vehicleID, licencePlateNumber, manufacturer, year, model, boolean booked, boolean collected, electric
+- Namn: VehicleAssets
+- Gemensamma fält: vehicleID, licenceNumber, manufacturer, model, boolean isBooked, boolean isInUse, 
 - Gemensamma metoder: displayVehicleInfo(), newVehicle(), deleteVehicle, bookVehicle, retrieveVehicle, returnVehicle, isReserved(), inUse(),
 
 ## Subklasser (minst tre)
@@ -26,7 +36,7 @@ Find your perfect ride with CRS! (``C``ar ``R``ental ``S``oftware, ``Cool Ride S
 2. Truck displayVehicleInfo(), newVehicle(), height, maxCarryWeight, truckBedDimensions,
 3. MotorizedBike displayVehicleInfo(), newVehicle(), topSpeed, sideCar—
 
-MembersClass ? partySize, history, incidents
+Members - customer information
 
 ## Interface
 
@@ -54,7 +64,8 @@ handle empty inventory scenario
 handle bad user input when creating new vehicle asset
 
 ## Motivering (fylls i senare i veckan)
-
+Created new ManageInventory.java class, unsure if this is a neat solution. CRSMenu.java just got really long. 
+interface implementation somewhat shallow.
 När ni kommit igång och gjort några ändringar: skriv kort varför strukturen ser ut som den gör, och om ni övervägde ett annat sätt att lösa det på. Detta behöver inte fyllas i redan i första commiten.
 To be added at future point
 ---

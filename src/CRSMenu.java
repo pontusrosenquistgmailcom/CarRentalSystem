@@ -4,18 +4,15 @@ import java.util.Scanner;
 
 public class CRSMenu {
 
-    interface Vehicle {
-        //void bookVehicle();
-        //void pickUpVehicle();
-        //void returnVehicle();
-    }
-
+// "main" program loop.
     public void run() {
 
         ArrayList<VehicleAssets> inventory = new ArrayList<>();
         ArrayList<Members> members = new ArrayList<>();
 
-        members.add(new Members(1, "Pontus", "Rosenquist"));
+        //preprogrammed members and vehicles
+        members.add(new Members(1, "Pontus", "Rosenquist", 36));
+        members.add(new Members(2, "Baltazar", "Andersson", 19));
 
         inventory.add(new PassengerCar(1, "ABC123", "Volvo", "Firebird", 4));
         inventory.add(new PassengerCar(2, "UFT901", "Toyota", "Ultra", 4));
@@ -25,8 +22,6 @@ public class CRSMenu {
         inventory.add(new MotorizedBike(6, "GAM", "Harley-Davidsson", "Extra", 190.5, false));
 
 
-        inventory.getLast().bookVehicle(members.getFirst());
-
         VehicleAssets vehicle;
         int i;
         int userChoice;
@@ -35,7 +30,7 @@ public class CRSMenu {
             this.displayMenu();
             userChoice = acceptUserMenuInput();
             //debug printLine info dump. move acceptUserMenuInput into switch condition
-            System.out.println("Selected: " + userChoice);
+            //System.out.println("Selected: " + userChoice);
 
             switch (userChoice) {
                 // HERE WE SELECT A VEHICLE AND A USER FOR BOOKING
@@ -66,8 +61,11 @@ public class CRSMenu {
                         member.printUserInfo();
 
                         // DO THE BOOKING
-                        vehicle.bookVehicle(member);
-                        System.out.println("Booking successful!");
+                        if(vehicle.bookVehicle(member)){
+                            System.out.println("Booking successful!");
+                        } else {
+                            System.out.println( member.getFullName() + " cannot rent that vehicle!");
+                        }
                         break;
                     }
                     break;

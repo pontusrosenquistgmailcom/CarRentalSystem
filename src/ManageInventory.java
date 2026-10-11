@@ -1,10 +1,11 @@
 //menus inside menus
+//creating this might have been a mistake...
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-class ManageInventory {
+public class ManageInventory {
     public static void managementMenu(ArrayList<VehicleAssets> assets){
         System.out.println("CRS Manage Inventory options:\n1: add new vehicle asset.\n2: edit vehicle asset.\n3: remove vehicle asset.\n4: Return to Main menu");
 

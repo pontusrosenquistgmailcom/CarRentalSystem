@@ -1,4 +1,4 @@
-public class Truck extends VehicleAssets{
+public class Truck extends VehicleAssets implements VehicleRenting{
     private double height;
     private int carryCapacity;
 
@@ -33,10 +33,17 @@ public class Truck extends VehicleAssets{
                 " | Height: " + this.getHeight() + " m" +
                 " | Capacity: " + this.getCarryCapacity() + " Kg");
         if (this.isInUse()) {
-            System.out.print(" | This vehicle has been picked up by: " + this.getUser().getLastName());
+            System.out.print(" | This vehicle has been picked up by: " + this.getUser().getFullName());
         } else if (this.isBooked()) {
-            System.out.print(" | This vehicle is booked by: " + this.getUser().getName());
+            System.out.print(" | This vehicle is booked by: " + this.getUser().getFullName());
         }
         System.out.println("");
+    }
+
+    @Override
+    public boolean bookVehicle(Members m) {
+        this.setBooked(true);
+        this.setUser(m);
+        return true;
     }
 }

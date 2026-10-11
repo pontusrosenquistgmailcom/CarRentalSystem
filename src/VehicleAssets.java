@@ -1,4 +1,4 @@
-public class VehicleAssets {
+public class VehicleAssets implements VehicleRenting{
     // vehicleID is an internal ID for the vehicle
     private int vehicleID;
     // licenceNumber is the official/legal ID of the vehicle
@@ -112,21 +112,25 @@ public class VehicleAssets {
 
     private void printConditionalInfo(){
         if (this.isInUse()) {
-            System.out.print(" | This vehicle has been picked up by: " + this.user.getLastName());
+            System.out.print(" | This vehicle has been picked up by: " + this.getUser().getFullName());
         } else if (this.isBooked()) {
-            System.out.print(" | This vehicle is booked by: " + this.user.getName());
+            System.out.print(" | This vehicle is booked by: " + this.getUser().getFullName());
         }
         System.out.println("");
     }
 
+    public void setUser(Members member){
+        this.user = member;
+    }
 
     public Members getUser(){
         return this.user;
     }
 
-    public void bookVehicle(Members m) {
+    public boolean bookVehicle(Members m) {
         this.setBooked(true);
         this.user = m;
+        return true;
     }
 
     public void returnVehicle() {

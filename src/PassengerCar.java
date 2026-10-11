@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class PassengerCar extends VehicleAssets implements CRSMenu.Vehicle {
+public class PassengerCar extends VehicleAssets implements VehicleRenting {
     private int numberOfSeats;
 
     public PassengerCar(int vehicleID, String licenceNumber, String manufacturer, String model, int numberOfSeats) {
@@ -22,11 +22,17 @@ public class PassengerCar extends VehicleAssets implements CRSMenu.Vehicle {
                 " | Model: " + this.getModel() +
                 " | Seats: " + this.getNumberOfSeats());
         if (this.isInUse()) {
-            System.out.print(" | This vehicle has been picked up by: " + this.getUser().getLastName());
+            System.out.print(" | This vehicle has been picked up by: " + this.getUser().getFullName());
         } else if (this.isBooked()) {
-            System.out.print(" | This vehicle is booked by: " + this.getUser().getName());
+            System.out.print(" | This vehicle is booked by: " + this.getUser().getFullName());
         }
         System.out.println("");
     }
 
+    @Override
+    public boolean bookVehicle(Members m) {
+        this.setBooked(true);
+        this.setUser(m);
+        return true;
+    }
 }

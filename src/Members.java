@@ -3,12 +3,15 @@ public class Members {
     private String name;
     private String lastName;
     private String fullName;
+    private int age;
 
-    public Members(int userID, String name, String lastName) {
+
+    public Members(int userID, String name, String lastName, int age) {
         this.userID = userID;
         this.name = name;
         this.lastName = lastName;
         this.fullName = name + " " + lastName;
+        this.age = age;
     }
 
     public int getUserID() {
@@ -37,6 +40,14 @@ public class Members {
 
     public String getFullName(){
         return this.fullName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public void printUserInfo(){

@@ -1,4 +1,4 @@
-public class MotorizedBike extends VehicleAssets{
+public class MotorizedBike extends VehicleAssets implements VehicleRenting{
     private double topSpeed;
     private boolean hasSideCar;
 
@@ -37,8 +37,21 @@ public class MotorizedBike extends VehicleAssets{
         if (this.isInUse()) {
             System.out.print(" | This vehicle has been picked up by: " + this.getUser().getLastName());
         } else if (this.isBooked()) {
-            System.out.print(" | This vehicle is booked by: " + this.getUser().getName());
+            System.out.print(" | This vehicle is booked by: " + this.getUser().getFullName());
         }
         System.out.println("");
+    }
+
+
+
+    @Override
+    public boolean bookVehicle(Members m) {
+        if(m.getAge() >= 24){
+            this.setBooked(true);
+            this.setUser(m);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
