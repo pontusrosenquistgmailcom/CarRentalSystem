@@ -40,9 +40,9 @@ public class Members {
     }
 
     public void printUserInfo(){
-        System.out.println("[userID: " + this.getUserID() +
+        System.out.println("[ userID: " + this.getUserID() +
                 " | FirstName: " + this.getName() +
-                " | LastName: " + this.getLastName() + "]");
+                " | LastName: " + this.getLastName() + " ]");
     }
 
 

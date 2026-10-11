@@ -4,49 +4,6 @@ import java.util.Scanner;
 
 public class CRSMenu {
 
-    private void displayInventory(ArrayList<VehicleAssets> inv, int displaySort) {
-
-        // 0 = display all
-        // 1 = display available for booking (hide isBooked & inUse)
-        // 2 = display all isBooked, for collection
-        // 3 = display inUse for return
-        switch (displaySort) {
-            // 0 = display ALL
-            case 0:
-                for (VehicleAssets v : inv) {
-                    v.printVehicle();
-                }
-                break;
-            // 1 show available for booking
-            case 1:
-                for (VehicleAssets v : inv) {
-                    if (!v.isInUse() && !v.isBooked()) {
-                        v.printVehicle();
-                    }
-                }
-                break;
-            // 2 show booked for pickup
-            case 2:
-                for (VehicleAssets v : inv) {
-                    if (v.isBooked() && !v.isInUse()) {
-                        v.printVehicle();
-                    }
-                }
-                break;
-            // 3 show inUse for return
-            case 3:
-                for (VehicleAssets v : inv) {
-                    if (v.isInUse()) {
-                        v.printVehicle();
-                    }
-                }
-                break;
-            default:
-                // you should not end up here!
-                System.out.println("CRSMenu displayInventory: DEFAULT");
-                break;
-        }
-    }
 
     public void run() {
 
@@ -65,7 +22,8 @@ public class CRSMenu {
 
         inventory.getLast().bookVehicle(members.getFirst());
 
-
+        VehicleAssets vehicle;
+        int i;
         int userChoice;
         boolean keepRunning = true;
         do {
@@ -79,17 +37,21 @@ public class CRSMenu {
                 case 1:
                     while (true) {
                         System.out.println("Vehicles available for booking: ");
-                        displayInventory(inventory, 1);
+                        i = displayInventory(inventory, 1);
+                        if(i == 0){
+                            System.out.println("\u001B[33mAll vehicles are currently unavailable and cannot be booked\u001B[0m");
+                            break;
+                        }
 
-                        VehicleAssets vehicle = selectVehicleForBooking(inventory);
+                        vehicle = selectVehicleForBooking(inventory);
                         if (vehicle == null) {
-                            System.out.println("CANCEL: Returning to Main menu.");
+                            System.out.println("\u001B[33mCANCEL\u001B[0m: Returning to Main menu.");
                             break;
                         }
 
                         Members member = searchSelectMembers(members);
                         if (member == null) {
-                            System.out.println("CANCEL: returning to vehicle selection.");
+                            System.out.println("\u001B[33mCANCEL\u001B[0m: returning to vehicle selection.");
                             continue;
                         }
 
@@ -105,24 +67,34 @@ public class CRSMenu {
                     }
                     break;
                 case 2:
-                    while (true) {
-                        System.out.println("Vehicles available for pickup: ");
-                        displayInventory(inventory, 2);
-                        VehicleAssets vehicle = selectVehicleForPickUp(inventory);
-                        if(vehicle == null){
-                            System.out.println("CANCEL: returning to main menu.");
-                            break;
-                        }
-
-                        vehicle.pickUp();
-                        System.out.println("[" + vehicle.getLicenceNumber() + "] " + vehicle.getManufacturer() + " " + vehicle.getModel() + " successfully delivered to customer");
-
+                    System.out.println("Vehicles available for pickup: ");
+                    i = displayInventory(inventory, 2);
+                    if(i == 0){
+                        System.out.println("\u001B[33mThere are no booked vehicles.\u001B[0m");
                         break;
                     }
+                    vehicle = selectVehicleForPickUp(inventory);
+                    if (vehicle == null) {
+                        System.out.println("\u001B[33mCANCEL\u001B[0m: Returning to main menu.");
+                        break;
+                    }
+                    vehicle.pickUpVehicle();
+                    System.out.println("[" + vehicle.getLicenceNumber() + "] " + vehicle.getManufacturer() + " " + vehicle.getModel() + " successfully delivered to customer");
                     break;
                 case 3:
                     System.out.println("Vehicles available for return");
-                    displayInventory(inventory, 3);
+                    i = displayInventory(inventory, 3);
+                    if(i == 0){
+                        System.out.println("\u001B[33mThere are no vehicles to return!\u001B[0m");
+                        break;
+                    }
+                    vehicle = selectVehicleForReturn(inventory);
+                    if(vehicle == null) {
+                        System.out.println("\u001B[33mCANCEL\u001B[0m: Returning to Main menu.");
+                        break;
+                    }
+                    vehicle.returnVehicle();
+                    System.out.println("[" + vehicle.getLicenceNumber() + "] returned successfully.");
                     break;
                 case 4:
                     System.out.println("todo. implement add/remove vehicle");
@@ -139,6 +111,55 @@ public class CRSMenu {
 
 
         } while (keepRunning);
+    }
+
+    private int displayInventory(ArrayList<VehicleAssets> inv, int displaySort) {
+        int counter = 0;
+        // 0 = display all
+        // 1 = display available for booking (hide isBooked & inUse)
+        // 2 = display all isBooked, for collection
+        // 3 = display inUse for return
+        switch (displaySort) {
+            // 0 = display ALL
+            case 0:
+                for (VehicleAssets v : inv) {
+                    v.printVehicle();
+                    counter++;
+                }
+                break;
+            // 1 show available for booking
+            case 1:
+                for (VehicleAssets v : inv) {
+                    if (!v.isInUse() && !v.isBooked()) {
+                        v.printVehicle();
+                        counter++;
+                    }
+                }
+                break;
+            // 2 show booked for pickup
+            case 2:
+                for (VehicleAssets v : inv) {
+                    if (v.isBooked() && !v.isInUse()) {
+                        v.printVehicle();
+                        counter++;
+                    }
+                }
+                break;
+            // 3 show inUse for return
+            case 3:
+                for (VehicleAssets v : inv) {
+                    if (v.isInUse()) {
+                        v.printVehicle();
+                        counter++;
+                    }
+                }
+                break;
+            default:
+                // you should not end up here!
+                System.out.println("CRSMenu displayInventory: DEFAULT");
+                break;
+        }
+        return counter;
     }
 
     private void displayMenu() {
@@ -215,7 +236,7 @@ public class CRSMenu {
         return null;
     }
 
-// select vehicle that is available for booking. on user CANCEL returns NULL
+    // select vehicle that is available for booking. on user CANCEL returns NULL
     private VehicleAssets selectVehicleForBooking(ArrayList<VehicleAssets> vehicles) {
         while (true) {
             Scanner scanner = new Scanner(System.in);
@@ -248,7 +269,7 @@ public class CRSMenu {
 
     }
 
-    private VehicleAssets selectVehicleForPickUp(ArrayList<VehicleAssets> vehicles){
+    private VehicleAssets selectVehicleForPickUp(ArrayList<VehicleAssets> vehicles) {
 
         while (true) {
             Scanner scanner = new Scanner(System.in);
@@ -263,6 +284,33 @@ public class CRSMenu {
                             System.out.println("ID: [" + userInput + "] vehicle \u001B[31mis not available\u001B[0m for pick up.");
                             break;
                         }
+                        return v;
+                    }
+                }
+                System.out.println("ERROR: No matching vehicle ID");
+
+            } catch (InputMismatchException e) {
+                String userInputString = scanner.nextLine();
+                if (userInputString.equalsIgnoreCase("cancel") || userInputString.equalsIgnoreCase("x")) {
+                    //System.out.println("user input : " + userInputString + " returning NULL");
+                    return null;
+                }
+                System.out.println("ERROR: incorrect input format.");
+
+            }
+        }
+
+    }
+
+    private VehicleAssets selectVehicleForReturn(ArrayList<VehicleAssets> vehicles) {
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter vehicleID to select vehicle for return: ");
+
+            try {
+                int userInput = scanner.nextInt();
+                for (VehicleAssets v : vehicles) {
+                    if (v.getVehicleID() == userInput && v.isInUse()) {
                         return v;
                     }
                 }

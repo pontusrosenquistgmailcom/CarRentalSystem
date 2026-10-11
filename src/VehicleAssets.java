@@ -131,9 +131,12 @@ public class VehicleAssets {
 
     public void returnVehicle() {
         this.setBooked(false);
+        this.setInUse(false);
         this.user = null;
     }
-    public void pickUp(){
+    public void pickUpVehicle(){
         this.setInUse(true);
     }
 }
+
+
