@@ -102,7 +102,7 @@ public class CRSMenu {
                 case 4:
                     //System.out.println("todo. implement add/remove vehicle");
                     //displayInventory(inventory, 0);
-                    ManageInventory.managementMenu(inventory);
+                    ManageInventory.managementMenu(inventory, members);
                     break;
                 case 5:
                     keepRunning = false;
@@ -225,6 +225,7 @@ public class CRSMenu {
                 //System.out.println("you entered (STRING): " + name);
                 if (name.equalsIgnoreCase("new")) {
                     System.out.println("to do: IMPLEMENT NEW USER WORKFLOW HERE---");
+                    ManageInventory.newMember(members);
                 } else if (name.equalsIgnoreCase("cancel") || name.equalsIgnoreCase("x")) {
                     break;
                 }

@@ -6,8 +6,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ManageInventory {
-    public static void managementMenu(ArrayList<VehicleAssets> assets){
-        System.out.println("CRS Manage Inventory options:\n1: add new vehicle asset.\n2: edit vehicle asset.\n3: remove vehicle asset.\n4: Return to Main menu");
+    public static void managementMenu(ArrayList<VehicleAssets> assets, ArrayList<Members> members){
+        System.out.println("CRS Manage Inventory options:\n1: add new vehicle asset.\n2: edit vehicle asset.\n3: remove vehicle asset.\n4: add new member\n5: Return to Main menu");
 
         System.out.print("Select option: ");
         int userInputInt = getUserInputInt();
@@ -26,6 +26,9 @@ public class ManageInventory {
             case 3:
                 removeVehicleAsset(assets);
                 break;
+            case 4:
+                newMember(members);
+                break;
             default:
                 System.out.println("\u001B[33mCANCEL\u001B[0m: Returning to Main Menu.");
                 break;
@@ -37,6 +40,48 @@ public class ManageInventory {
         for(VehicleAssets v : assets){
             v.printVehicle();
         }
+    }
+
+    public static void newMember(ArrayList<Members> members){
+        int newMemberID = members.size();
+
+        boolean match;
+        do {
+            match = false;
+            newMemberID++;
+            //System.out.println("New vehicleID: " + newVehicleID);
+            for (Members m : members) {
+                if (m.getUserID() == newMemberID) {
+                    match = true;
+                    break;
+                }
+            }
+
+        } while (match);
+
+        System.out.print("Enter customer's first name: ");
+        String newFirstName = getUserinputString();
+        if (newFirstName == null) {
+            System.out.println("\u001B[33mCANCEL\u001B[0m: Returning to Main Menu.");
+            return;
+        }
+        System.out.print("Enter customer's last name: ");
+        String newLastName = getUserinputString();
+        if (newLastName == null) {
+            System.out.println("\u001B[33mCANCEL\u001B[0m: Returning to Main Menu.");
+            return;
+        }
+
+        System.out.print("Enter customer's age: ");
+        int newAge = getUserInputInt();
+        if (newAge < 0) {
+            System.out.println("\u001B[33mCANCEL\u001B[0m: Returning to Main Menu.");
+            return;
+        }
+
+        members.add(new Members(newMemberID,newFirstName, newLastName, newAge));
+
+
     }
 
     private static void removeVehicleAsset(ArrayList<VehicleAssets> assets){
@@ -56,7 +101,7 @@ public class ManageInventory {
             } catch (InputMismatchException e) {
                 String userInputString = scanner.nextLine();
                 if (userInputString.equalsIgnoreCase("cancel") || userInputString.equalsIgnoreCase("x")) {
-                    //System.out.println("user input : " + userInputString + " returning NULL");
+                    System.out.println("\u001B[33mCANCEL\u001B[0m: Returning to Main Menu.");
                     return;
                 }
                 System.out.println("ERROR: incorrect input format.");
