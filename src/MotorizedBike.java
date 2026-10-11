@@ -2,7 +2,7 @@ public class MotorizedBike extends VehicleAssets{
     private double topSpeed;
     private boolean hasSideCar;
 
-    public MotorizedBike(String vehicleID, String licenceNumber, String manufacturer, String model, boolean electric, boolean hybrid, boolean isBooked, boolean inUse, double topSpeed, boolean hasSideCar) {
+    public MotorizedBike(int vehicleID, String licenceNumber, String manufacturer, String model, boolean electric, boolean hybrid, boolean isBooked, boolean inUse, double topSpeed, boolean hasSideCar) {
         super(vehicleID, licenceNumber, manufacturer, model, electric, hybrid, isBooked, inUse);
         setTopSpeed(topSpeed);
         setHasSideCar(hasSideCar);
@@ -25,7 +25,7 @@ public class MotorizedBike extends VehicleAssets{
     }
     @Override
     public void printVehicle() {
-        System.out.print("Manufacturer: " + this.getManufacturer() +
+        System.out.print("ID: " + this.getVehicleID() + " | Manufacturer: " + this.getManufacturer() +
                 " | Model: " + this.getModel() +
                 " | Top Speed: " + this.getTopSpeed() + " Km/h" +
                 " | Sidecar: ");

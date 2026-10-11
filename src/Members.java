@@ -2,11 +2,13 @@ public class Members {
     private int userID;
     private String name;
     private String lastName;
+    private String fullName;
 
     public Members(int userID, String name, String lastName) {
         this.userID = userID;
         this.name = name;
         this.lastName = lastName;
+        this.fullName = name + " " + lastName;
     }
 
     public int getUserID() {
@@ -32,4 +34,18 @@ public class Members {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getFullName(){
+        return this.fullName;
+    }
+
+    public void printUserInfo(){
+        System.out.println("[userID: " + this.getUserID() +
+                " | FirstName: " + this.getName() +
+                " | LastName: " + this.getLastName() + "]");
+    }
+
+
+
+
 }

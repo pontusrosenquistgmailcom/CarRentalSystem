@@ -3,7 +3,7 @@ public class Truck extends VehicleAssets{
     private int carryCapacity;
 
 
-    public Truck(String vehicleID, String licenceNumber, String manufacturer, String model, boolean electric, boolean hybrid, boolean isBooked, boolean inUse, double height, int carryCapacity) {
+    public Truck(int vehicleID, String licenceNumber, String manufacturer, String model, boolean electric, boolean hybrid, boolean isBooked, boolean inUse, double height, int carryCapacity) {
         super(vehicleID, licenceNumber, manufacturer, model, electric, hybrid, isBooked, inUse);
         setHeight(height);
         setCarryCapacity(carryCapacity);
@@ -28,7 +28,7 @@ public class Truck extends VehicleAssets{
 
     @Override
     public void printVehicle() {
-        System.out.print("Manufacturer: " + this.getManufacturer() +
+        System.out.print("ID: " + this.getVehicleID() + " | Manufacturer: " + this.getManufacturer() +
                 " | Model: " + this.getModel() +
                 " | Height: " + this.getHeight() + " m" +
                 " | Capacity: " + this.getCarryCapacity() + " Kg");

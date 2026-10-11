@@ -1,7 +1,7 @@
 public class PassengerCar extends VehicleAssets{
     private int numberOfSeats;
 
-    public PassengerCar(String vehicleID, String licenceNumber, String manufacturer, String model, boolean electric, boolean hybrid, boolean isBooked, boolean inUse, int numberOfSeats) {
+    public PassengerCar(int vehicleID, String licenceNumber, String manufacturer, String model, boolean electric, boolean hybrid, boolean isBooked, boolean inUse, int numberOfSeats) {
         super(vehicleID, licenceNumber, manufacturer, model, electric, hybrid, isBooked, inUse);
         setNumberOfSeats(numberOfSeats);
     }
@@ -16,7 +16,7 @@ public class PassengerCar extends VehicleAssets{
 
     @Override
     public void printVehicle() {
-        System.out.print("Manufacturer: " + this.getManufacturer() +
+        System.out.print("ID: " + this.getVehicleID() + " | Manufacturer: " + this.getManufacturer() +
                 " | Model: " + this.getModel() +
                 " | Seats: " + this.getNumberOfSeats());
         if (this.isBooked()) {

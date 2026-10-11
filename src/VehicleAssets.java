@@ -1,6 +1,6 @@
 public class VehicleAssets {
     // vehicleID is an internal ID for the vehicle
-    private String vehicleID;
+    private int vehicleID;
     // licenceNumber is the official/legal ID of the vehicle
     private String licenceNumber;
 
@@ -12,7 +12,7 @@ public class VehicleAssets {
     private boolean inUse;
     private Members user;
 
-    public VehicleAssets(String vehicleID, String licenceNumber, String manufacturer, String model, boolean electric, boolean hybrid, boolean isBooked, boolean inUse) {
+    public VehicleAssets(int vehicleID, String licenceNumber, String manufacturer, String model, boolean electric, boolean hybrid, boolean isBooked, boolean inUse) {
         setVehicleID(vehicleID);
         setLicenceNumber(licenceNumber);
         setManufacturer(manufacturer);
@@ -23,13 +23,13 @@ public class VehicleAssets {
         setInUse(inUse);
     }
 
-    public String getVehicleID() {
+    public int getVehicleID() {
         return vehicleID;
     }
 
-    public void setVehicleID(String vehicleID) {
-        if (vehicleID == null || vehicleID.isBlank()) {
-            throw new IllegalArgumentException("ERROR: vehicleID cannot be blank");
+    public void setVehicleID(int vehicleID) {
+        if (vehicleID < 1) {
+            throw new IllegalArgumentException("ERROR: vehicleID must be positive integer");
         }
         this.vehicleID = vehicleID;
     }
@@ -100,8 +100,17 @@ public class VehicleAssets {
     }
 
     public void printVehicle() {
-        System.out.print("Manufacturer: " + this.getManufacturer() +
+        printDefaultInfo();
+        printConditionalInfo();
+    }
+
+    //maybe split print to make it less copied code?? idk
+    private void printDefaultInfo() {
+        System.out.print("ID: " + this.getVehicleID() + " | Manufacturer: " + this.getManufacturer() +
                 " | Model: " + this.getModel());
+    }
+
+    private void printConditionalInfo(){
         if (this.isBooked) {
             System.out.print(" | This vehicle is booked by: " + this.user.getName());
         } else if (this.isInUse()) {
@@ -109,6 +118,7 @@ public class VehicleAssets {
         }
         System.out.println("");
     }
+
 
     public Members getUser(){
         return this.user;
