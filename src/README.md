@@ -21,7 +21,7 @@ Find your perfect ride with CRS! (``C``ar ``R``ental ``S``oftware, ``Cool Ride S
 
 1. PassengerCar displayVehicleInfo(), numberOfSeats, colour, newVehicle(), comfortClass, 
 2. Truck displayVehicleInfo(), newVehicle(), height, maxCarryWeight, truckBedDimensions, — vad gör den annorlunda, vilka metoder overridas?
-3. MotorizedBike displayVehicleInfo(), newVehicle(), topSpeed, sideCar— vad gör den annorlunda, vilka metoder overridas?
+3. Motorcycle displayVehicleInfo(), newVehicle(), topSpeed, sideCar— vad gör den annorlunda, vilka metoder overridas?
 
 MembersClass ? partySize, history, incidents
 
@@ -29,7 +29,7 @@ MembersClass ? partySize, history, incidents
 
 - Namn: VehicleRenting
 - Metod(er): bookVehicle(), collectVehicle(), returnVehicle()
-- Implementeras av (minst två subklasser): PassengerCar, Truck, MotorizedBike
+- Implementeras av (minst två subklasser): PassengerCar, Truck, Motorcycle
 
 ## Meny
 
@@ -38,7 +38,7 @@ Collect ride -> select member-> asset delivered
 Return ride -> select vehicle -> asset returned
 Admin/ManageInventory -> newVehicle(), removeVehicle()
 
-implemented by most if not all vehicleSubclasses (PassengerCar, Truck, MotorizedBike)
+implemented by most if not all vehicleSubclasses (PassengerCar, Truck, Motorcycle)
 
 will have to iterate on menu flow. has to be smooth experience with CRS!
 

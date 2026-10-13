@@ -101,7 +101,7 @@ public class VehicleAssets implements VehicleRenting{
 
     public void printVehicle() {
         printDefaultInfo();
-        printConditionalInfo();
+        //printConditionalInfo();
     }
 
     //maybe split print to make it less copied code?? idk

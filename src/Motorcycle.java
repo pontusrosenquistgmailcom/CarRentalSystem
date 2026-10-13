@@ -1,8 +1,8 @@
-public class MotorizedBike extends VehicleAssets implements VehicleRenting{
+public class Motorcycle extends VehicleAssets implements VehicleRenting{
     private double topSpeed;
     private boolean hasSideCar;
 
-    public MotorizedBike(int vehicleID, String licenceNumber, String manufacturer, String model, double topSpeed, boolean hasSideCar) {
+    public Motorcycle(int vehicleID, String licenceNumber, String manufacturer, String model, double topSpeed, boolean hasSideCar) {
         super(vehicleID, licenceNumber, manufacturer, model);
         setTopSpeed(topSpeed);
         setHasSideCar(hasSideCar);
@@ -25,9 +25,8 @@ public class MotorizedBike extends VehicleAssets implements VehicleRenting{
     }
     @Override
     public void printVehicle() {
-        System.out.print("ID: " + this.getVehicleID() + " | Manufacturer: " + this.getManufacturer() +
-                " | Model: " + this.getModel() +
-                " | Top Speed: " + this.getTopSpeed() + " Km/h" +
+        super.printVehicle();
+        System.out.print(" | Top Speed: " + this.getTopSpeed() + " Km/h" +
                 " | Sidecar: ");
         if(hasSideCar()){
             System.out.print("Yes");
@@ -35,11 +34,12 @@ public class MotorizedBike extends VehicleAssets implements VehicleRenting{
             System.out.print("No");
         }
         if (this.isInUse()) {
-            System.out.print(" | This vehicle has been picked up by: " + this.getUser().getLastName());
+            System.out.println(" | This motorcycle has been picked up by: " + this.getUser().getLastName());
         } else if (this.isBooked()) {
-            System.out.print(" | This vehicle is booked by: " + this.getUser().getFullName());
+            System.out.println(" | This motorcycle is booked by: " + this.getUser().getFullName());
+        }else {
+            System.out.println();
         }
-        System.out.println("");
     }
 
 
@@ -51,6 +51,7 @@ public class MotorizedBike extends VehicleAssets implements VehicleRenting{
             this.setUser(m);
             return true;
         } else {
+            System.out.println("Customer: " + m.getFullName() + " is too young to rent a motorcycle.");
             return false;
         }
     }

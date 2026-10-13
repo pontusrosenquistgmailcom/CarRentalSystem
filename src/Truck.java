@@ -28,16 +28,16 @@ public class Truck extends VehicleAssets implements VehicleRenting{
 
     @Override
     public void printVehicle() {
-        System.out.print("ID: " + this.getVehicleID() + " | Manufacturer: " + this.getManufacturer() +
-                " | Model: " + this.getModel() +
-                " | Height: " + this.getHeight() + " m" +
+        super.printVehicle();
+        System.out.print(" | Height: " + this.getHeight() + " m" +
                 " | Capacity: " + this.getCarryCapacity() + " Kg");
         if (this.isInUse()) {
-            System.out.print(" | This vehicle has been picked up by: " + this.getUser().getFullName());
+            System.out.println(" | This truck has been picked up by: " + this.getUser().getFullName());
         } else if (this.isBooked()) {
-            System.out.print(" | This vehicle is booked by: " + this.getUser().getFullName());
+            System.out.println(" | This truck is booked by: " + this.getUser().getFullName());
+        } else {
+            System.out.println();
         }
-        System.out.println("");
     }
 
     @Override

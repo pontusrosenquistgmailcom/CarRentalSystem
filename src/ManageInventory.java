@@ -1,5 +1,5 @@
 //menus inside menus
-//creating this might have been a mistake...
+//dividing CRSMenu in two might have been a mistake...
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -133,7 +133,7 @@ public class ManageInventory {
         System.out.println("""
                 1. Passenger Car
                 2. Truck
-                3. Motorized Bike
+                3. Motorcycle
                 4. Return to Main menu""");
         System.out.print("Select vehicle type (1-3): ");
         int userInputInt = getUserInputInt();
@@ -190,15 +190,15 @@ public class ManageInventory {
                 assets.add(new Truck(newVehicleID, newLicenseNumber, newManufacturer, newModel,newTruckHeight, newTruckCarry));
                 break;
             case 3:
-                System.out.print("Enter bike top speed (double, Km/h): ");
+                System.out.print("Enter MC top speed (double, Km/h): ");
                 double newTopSpeed = getUserInputDouble();
                 if (newTopSpeed < 0) {
                     System.out.println("\u001B[33mCANCEL\u001B[0m: Returning to Main Menu.");
                     return;
                 }
-                System.out.print("Does the bike have a sidecar (boolean, y/n):");
+                System.out.print("Does the MC have a sidecar (boolean, y/n):");
                 boolean newSideCar = getUserInputBoolean();
-                assets.add(new MotorizedBike(newVehicleID, newLicenseNumber, newManufacturer, newModel, newTopSpeed, newSideCar));
+                assets.add(new Motorcycle(newVehicleID, newLicenseNumber, newManufacturer, newModel, newTopSpeed, newSideCar));
                 break;
             default:
                 break;

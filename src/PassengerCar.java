@@ -18,15 +18,15 @@ public class PassengerCar extends VehicleAssets implements VehicleRenting {
 
     @Override
     public void printVehicle() {
-        System.out.print("ID: " + this.getVehicleID() + " | Manufacturer: " + this.getManufacturer() +
-                " | Model: " + this.getModel() +
-                " | Seats: " + this.getNumberOfSeats());
+        super.printVehicle();
+        System.out.print(" | Seats: " + this.getNumberOfSeats());
         if (this.isInUse()) {
-            System.out.print(" | This vehicle has been picked up by: " + this.getUser().getFullName());
+            System.out.println(" | This car has been picked up by: " + this.getUser().getFullName());
         } else if (this.isBooked()) {
-            System.out.print(" | This vehicle is booked by: " + this.getUser().getFullName());
+            System.out.println(" | This car is booked by: " + this.getUser().getFullName());
+        } else{
+            System.out.println();
         }
-        System.out.println("");
     }
 
     @Override

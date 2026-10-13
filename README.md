@@ -2,7 +2,7 @@
 Small console application that manages vehicle assets for a rental car business.
 
 VehicleAssets superclass
-PassengerCar, Truck, MotorizedBike subclasses
+PassengerCar, Truck, Motorcycle subclasses
 
 bookVehicle();
 pickUpVehicle();
@@ -34,7 +34,7 @@ Find your perfect ride with CRS! (``C``ar ``R``ental ``S``oftware, ``Cool Ride S
 
 1. PassengerCar displayVehicleInfo(), numberOfSeats, colour, newVehicle(), comfortClass,
 2. Truck displayVehicleInfo(), newVehicle(), height, maxCarryWeight, truckBedDimensions,
-3. MotorizedBike displayVehicleInfo(), newVehicle(), topSpeed, sideCar—
+3. Motorcycle displayVehicleInfo(), newVehicle(), topSpeed, sideCar—
 
 Members - customer information
 
@@ -42,7 +42,7 @@ Members - customer information
 
 - Namn: VehicleRenting
 - Metod(er): bookVehicle(), collectVehicle(), returnVehicle()
-- Implementeras av (minst två subklasser): PassengerCar, Truck, MotorizedBike
+- Implementeras av (minst två subklasser): PassengerCar, Truck, Motorcycle
 
 ## Meny
 
@@ -51,7 +51,7 @@ Collect ride -> select member-> asset delivered
 Return ride -> select vehicle -> asset returned
 Admin/ManageInventory -> newVehicle(), removeVehicle()
 
-implemented by most if not all vehicleSubclasses (PassengerCar, Truck, MotorizedBike)
+implemented by most if not all vehicleSubclasses (PassengerCar, Truck, Motorcycle)
 
 will have to iterate on menu flow. has to be smooth experience with CRS!
 

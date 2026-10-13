@@ -4,22 +4,25 @@ import java.util.Scanner;
 
 public class CRSMenu {
 
-// "main" program loop.
+// run contains "main" program do{...}while menu loop
     public void run() {
 
         ArrayList<VehicleAssets> inventory = new ArrayList<>();
         ArrayList<Members> members = new ArrayList<>();
 
-        //preprogrammed members and vehicles
+        //preprogrammed members and vehicle assets
         members.add(new Members(1, "Pontus", "Rosenquist", 36));
-        members.add(new Members(2, "Baltazar", "Andersson", 19));
+        members.add(new Members(2, "Jessica", "Bolund", 19));
+        members.add(new Members(3, "Aragorn", "'Strider' Vidstige",120));
 
-        inventory.add(new PassengerCar(1, "ABC123", "Volvo", "Firebird", 4));
-        inventory.add(new PassengerCar(2, "UFT901", "Toyota", "Ultra", 4));
-        inventory.add(new Truck(3, "LYX099", "Mercedes", "Crawler", 3.35, 4500));
-        inventory.add(new PassengerCar(4, "AAR009", "Opel", "Astra", 5));
-        inventory.add(new Truck(5, "TRY999", "BYD", "XTK", 2.15, 2000));
-        inventory.add(new MotorizedBike(6, "GAM", "Harley-Davidsson", "Extra", 190.5, false));
+        inventory.add(new PassengerCar(1, "TMG047", "Volvo", "V70", 6));
+        //inventory.add(new PassengerCar(2, "UFT901", "Toyota", "Mirai", 4));
+        //inventory.add(new Truck(3, "LYX691", "Mercedes-Benz", "S-Class", 3.35, 4500));
+        //inventory.add(new PassengerCar(4, "XAL009", "Opel", "Astra", 5));
+        inventory.add(new Truck(5, "CHN909", "BYD", "Atto 3", 2.15, 2000));
+        inventory.add(new Motorcycle(6, "OTE19B", "Harley-Davidsson", "Low Rider S", 190.5, false));
+
+        System.out.println("Welcome to the Car Rental System!");
 
 
         VehicleAssets vehicle;
@@ -28,13 +31,14 @@ public class CRSMenu {
         boolean keepRunning = true;
         do {
             this.displayMenu();
+            System.out.print("Main menu select option: ");
             userChoice = acceptUserMenuInput();
             //debug printLine info dump. move acceptUserMenuInput into switch condition
             //System.out.println("Selected: " + userChoice);
 
             switch (userChoice) {
-                // HERE WE SELECT A VEHICLE AND A USER FOR BOOKING
                 case 1:
+                    // HERE WE SELECT A VEHICLE AND A USER FOR BOOKING
                     while (true) {
                         System.out.println("Vehicles available for booking: ");
                         i = displayInventory(inventory, 1);
@@ -62,14 +66,15 @@ public class CRSMenu {
 
                         // DO THE BOOKING
                         if(vehicle.bookVehicle(member)){
-                            System.out.println("Booking successful!");
+                            System.out.println("Booking \u001B[32msuccessful\u001B[0m!");
                         } else {
-                            System.out.println( member.getFullName() + " cannot rent that vehicle!");
+                            System.out.println("\u001B[33mVehicle booking canceled.\u001B[0m");
                         }
                         break;
                     }
                     break;
                 case 2:
+                    // list vehicles available for pickup and perform pickup
                     System.out.println("Vehicles available for pickup: ");
                     i = displayInventory(inventory, 2);
                     if (i == 0) {
@@ -82,13 +87,14 @@ public class CRSMenu {
                         break;
                     }
                     vehicle.pickUpVehicle();
-                    System.out.println("[" + vehicle.getLicenceNumber() + "] " + vehicle.getManufacturer() + " " + vehicle.getModel() + " successfully delivered to customer");
+                    System.out.println("[" + vehicle.getLicenceNumber() + "] " + vehicle.getManufacturer() + " " + vehicle.getModel() + " \u001B[32msuccessfully picked up\u001B[0m by customer");
                     break;
                 case 3:
+                    // list all vehicles available for return and perform return.
                     System.out.println("Vehicles available for return");
                     i = displayInventory(inventory, 3);
                     if (i == 0) {
-                        System.out.println("\u001B[33mThere are no vehicles to return!\u001B[0m");
+                        System.out.println("\u001B[33mThere are no vehicles in use by customers.\u001B[0m");
                         break;
                     }
                     vehicle = selectVehicleForReturn(inventory);
@@ -97,16 +103,15 @@ public class CRSMenu {
                         break;
                     }
                     vehicle.returnVehicle();
-                    System.out.println("[" + vehicle.getLicenceNumber() + "] returned successfully.");
+                    System.out.println("[" + vehicle.getLicenceNumber() + "] \u001B[32mreturned successfully\u001B[0m.");
                     break;
                 case 4:
-                    //System.out.println("todo. implement add/remove vehicle");
-                    //displayInventory(inventory, 0);
+                    // access the add/remove vehicle, manage customers (Members)
                     ManageInventory.managementMenu(inventory, members);
                     break;
                 case 5:
                     keepRunning = false;
-                    System.out.println("Exiting program...");
+                    System.out.println("\u001B[32mExiting program...\u001B[0m");
                     break;
                 default:
                     System.out.println("Please select option 1-5!");
@@ -167,11 +172,12 @@ public class CRSMenu {
     }
 
     private void displayMenu() {
-        System.out.println("Welcome to the Car Rental System!");
+        //System.out.println("Welcome to the Car Rental System!");
         System.out.println("""
-                1. Book ride
-                2. Retrieve ride
-                3. Return ride
+                
+                1. Book vehicle
+                2. Pickup vehicle
+                3. Return vehicle
                 4. Manage inventory
                 5. Exit program""");
     }
