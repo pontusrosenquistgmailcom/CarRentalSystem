@@ -1,4 +1,4 @@
-public class Truck extends VehicleAssets implements VehicleRenting{
+public class Truck extends VehicleAssets implements VehicleRenting {
     private double height;
     private int carryCapacity;
 
@@ -46,4 +46,15 @@ public class Truck extends VehicleAssets implements VehicleRenting{
         this.setUser(m);
         return true;
     }
+
+    @Override
+    public void pickUpVehicle() {
+        super.pickUpVehicle();
+    }
+
+    @Override
+    public void returnVehicle() {
+        super.returnVehicle();
+    }
+
 }

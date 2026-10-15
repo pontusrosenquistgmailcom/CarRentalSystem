@@ -116,7 +116,7 @@ public class VehicleAssets implements VehicleRenting{
         } else if (this.isBooked()) {
             System.out.print(" | This vehicle is booked by: " + this.getUser().getFullName());
         }
-        System.out.println("");
+        System.out.println();
     }
 
     public void setUser(Members member){
@@ -128,9 +128,14 @@ public class VehicleAssets implements VehicleRenting{
     }
 
     public boolean bookVehicle(Members m) {
-        this.setBooked(true);
-        this.user = m;
-        return true;
+        if(!this.isBooked()){
+            this.setBooked(true);
+            this.user = m;
+            return true;
+        }else {
+
+            return false;
+        }
     }
 
     public void returnVehicle() {

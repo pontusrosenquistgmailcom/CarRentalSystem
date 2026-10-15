@@ -7,38 +7,40 @@ public class CRSMenu {
 // run contains "main" program do{...}while menu loop
     public void run() {
 
+        // inventory stores cars, trucks and mcs
         ArrayList<VehicleAssets> inventory = new ArrayList<>();
+        // members stores customers
         ArrayList<Members> members = new ArrayList<>();
 
-        //preprogrammed members and vehicle assets
+        // preprogrammed customers
         members.add(new Members(1, "Pontus", "Rosenquist", 36));
         members.add(new Members(2, "Jessica", "Bolund", 19));
-        members.add(new Members(3, "Aragorn", "'Strider' Vidstige",120));
-
+        // preprogrammed vehicle assets
         inventory.add(new PassengerCar(1, "TMG047", "Volvo", "V70", 6));
-        //inventory.add(new PassengerCar(2, "UFT901", "Toyota", "Mirai", 4));
-        //inventory.add(new Truck(3, "LYX691", "Mercedes-Benz", "S-Class", 3.35, 4500));
-        //inventory.add(new PassengerCar(4, "XAL009", "Opel", "Astra", 5));
+        inventory.add(new PassengerCar(2, "UFT901", "Toyota", "Mirai", 4));
+        inventory.add(new Truck(3, "LYX691", "Mercedes-Benz", "S-Class", 3.35, 4500));
+        inventory.add(new PassengerCar(4, "XAL009", "Opel", "Astra", 5));
         inventory.add(new Truck(5, "CHN909", "BYD", "Atto 3", 2.15, 2000));
         inventory.add(new Motorcycle(6, "OTE19B", "Harley-Davidsson", "Low Rider S", 190.5, false));
 
-        System.out.println("Welcome to the Car Rental System!");
+        //System.out.println("Welcome to the Car Rental System!");
 
-
+        // holder variable for selected object in the inventory ArrayList
         VehicleAssets vehicle;
         int i;
-        int userChoice;
+        //int userChoice;
         boolean keepRunning = true;
         do {
             this.displayMenu();
             System.out.print("Main menu select option: ");
-            userChoice = acceptUserMenuInput();
+            //userChoice = acceptUserMenuInput();
             //debug printLine info dump. move acceptUserMenuInput into switch condition
             //System.out.println("Selected: " + userChoice);
 
-            switch (userChoice) {
+            switch (acceptUserMenuInput()) {
                 case 1:
-                    // HERE WE SELECT A VEHICLE AND A USER FOR BOOKING
+                    // select one vehicle from inventory arraylist
+                    // select one member from members arrayList
                     while (true) {
                         System.out.println("Vehicles available for booking: ");
                         i = displayInventory(inventory, 1);
@@ -74,7 +76,7 @@ public class CRSMenu {
                     }
                     break;
                 case 2:
-                    // list vehicles available for pickup and perform pickup
+                    // list vehicles available for pickup and perform pickup on selected vehicle
                     System.out.println("Vehicles available for pickup: ");
                     i = displayInventory(inventory, 2);
                     if (i == 0) {
@@ -90,7 +92,7 @@ public class CRSMenu {
                     System.out.println("[" + vehicle.getLicenceNumber() + "] " + vehicle.getManufacturer() + " " + vehicle.getModel() + " \u001B[32msuccessfully picked up\u001B[0m by customer");
                     break;
                 case 3:
-                    // list all vehicles available for return and perform return.
+                    // list all vehicles available for return and perform return on selected vehicle
                     System.out.println("Vehicles available for return");
                     i = displayInventory(inventory, 3);
                     if (i == 0) {
@@ -191,7 +193,7 @@ public class CRSMenu {
 
             try {
                 String strUserInput = scanner.nextLine();
-                if (strUserInput.equalsIgnoreCase("q") || strUserInput.equalsIgnoreCase("x") || strUserInput.toLowerCase().matches("exit")) {
+                if (strUserInput.equalsIgnoreCase("q") || strUserInput.equalsIgnoreCase("x") || strUserInput.equalsIgnoreCase("exit")) {
                     return 5;
                 }
             } catch (Exception e2) {

@@ -24,15 +24,24 @@ public class PassengerCar extends VehicleAssets implements VehicleRenting {
             System.out.println(" | This car has been picked up by: " + this.getUser().getFullName());
         } else if (this.isBooked()) {
             System.out.println(" | This car is booked by: " + this.getUser().getFullName());
-        } else{
+        } else {
             System.out.println();
         }
     }
 
     @Override
     public boolean bookVehicle(Members m) {
-        this.setBooked(true);
-        this.setUser(m);
-        return true;
+        return super.bookVehicle(m);
     }
+
+    @Override
+    public void pickUpVehicle() {
+        super.pickUpVehicle();
+    }
+
+    @Override
+    public void returnVehicle() {
+        super.returnVehicle();
+    }
+
 }

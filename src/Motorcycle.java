@@ -1,4 +1,4 @@
-public class Motorcycle extends VehicleAssets implements VehicleRenting{
+public class Motorcycle extends VehicleAssets implements VehicleRenting {
     private double topSpeed;
     private boolean hasSideCar;
 
@@ -23,12 +23,13 @@ public class Motorcycle extends VehicleAssets implements VehicleRenting{
     public void setHasSideCar(boolean hasSideCar) {
         this.hasSideCar = hasSideCar;
     }
+
     @Override
     public void printVehicle() {
         super.printVehicle();
         System.out.print(" | Top Speed: " + this.getTopSpeed() + " Km/h" +
                 " | Sidecar: ");
-        if(hasSideCar()){
+        if (hasSideCar()) {
             System.out.print("Yes");
         } else {
             System.out.print("No");
@@ -37,16 +38,14 @@ public class Motorcycle extends VehicleAssets implements VehicleRenting{
             System.out.println(" | This motorcycle has been picked up by: " + this.getUser().getLastName());
         } else if (this.isBooked()) {
             System.out.println(" | This motorcycle is booked by: " + this.getUser().getFullName());
-        }else {
+        } else {
             System.out.println();
         }
     }
 
-
-
     @Override
     public boolean bookVehicle(Members m) {
-        if(m.getAge() >= 24){
+        if (m.getAge() >= 24) {
             this.setBooked(true);
             this.setUser(m);
             return true;
@@ -55,4 +54,15 @@ public class Motorcycle extends VehicleAssets implements VehicleRenting{
             return false;
         }
     }
+
+    @Override
+    public void pickUpVehicle() {
+        super.pickUpVehicle();
+    }
+
+    @Override
+    public void returnVehicle() {
+        super.returnVehicle();
+    }
+
 }

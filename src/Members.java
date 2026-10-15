@@ -42,6 +42,8 @@ public class Members {
         return this.fullName;
     }
 
+
+
     public int getAge() {
         return age;
     }
@@ -55,8 +57,5 @@ public class Members {
                 " | FirstName: " + this.getName() +
                 " | LastName: " + this.getLastName() + " ]");
     }
-
-
-
 
 }
