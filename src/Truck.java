@@ -42,9 +42,7 @@ public class Truck extends VehicleAssets implements VehicleRenting {
 
     @Override
     public boolean bookVehicle(Members m) {
-        this.setBooked(true);
-        this.setUser(m);
-        return true;
+        return super.bookVehicle(m);
     }
 
     @Override

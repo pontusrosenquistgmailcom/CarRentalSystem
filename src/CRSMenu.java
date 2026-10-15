@@ -282,6 +282,7 @@ public class CRSMenu {
 
     }
 
+    // select vehicle that is available for pickup. on user CANCEL returns NULL
     private VehicleAssets selectVehicleForPickUp(ArrayList<VehicleAssets> vehicles) {
 
         while (true) {
@@ -315,6 +316,7 @@ public class CRSMenu {
 
     }
 
+    // select vehicle that is available for return. on user CANCEL returns NULL
     private VehicleAssets selectVehicleForReturn(ArrayList<VehicleAssets> vehicles) {
         while (true) {
             Scanner scanner = new Scanner(System.in);

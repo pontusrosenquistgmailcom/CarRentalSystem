@@ -46,11 +46,9 @@ public class Motorcycle extends VehicleAssets implements VehicleRenting {
     @Override
     public boolean bookVehicle(Members m) {
         if (m.getAge() >= 24) {
-            this.setBooked(true);
-            this.setUser(m);
-            return true;
+            return super.bookVehicle(m);
         } else {
-            System.out.println("Customer: " + m.getFullName() + " is too young to rent a motorcycle.");
+            System.out.println("Customer: " + m.getFullName() + " is not 24 years old and cannot rent a motorcycle.");
             return false;
         }
     }
